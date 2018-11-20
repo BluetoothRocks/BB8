@@ -1,0 +1,333 @@
+
+/* Basic layout */
+
+:root {
+	--settings-height: 40vh;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", sans-serif;
+}
+
+body {
+	background: #444;
+	text-align: center;
+}
+
+button {
+	color: #888;
+	background: none;
+	border: .3vh solid #888;
+	border-radius: 1vh;
+	outline: none;
+	cursor: pointer;
+}
+
+
+
+
+/* Content */
+
+.content {
+	opacity: 0.3;
+	transition: opacity .5s, fill .5s;
+}
+
+body.connected .content {
+	opacity: 1;
+}
+
+
+
+
+/* BB8 */
+
+.content > div {
+	position: absolute;
+	top: 10vh;
+	left: 10vw;
+	width: 80vw;
+	height: calc(100vh - var(--settings-height) - 20vh);
+}
+
+.content svg {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+
+/* Animation */
+
+@keyframes rotate {
+	0% {
+		transform: rotate(360deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+
+svg #ball {
+	animation: 1s infinite linear paused rotate;
+	transform-origin: 51% 65%;
+}
+
+.forward svg #ball, 
+.reverse svg #ball,
+.left svg #ball,
+.right svg #ball {
+	animation-play-state: running;
+}
+
+
+@keyframes wobble {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(15deg);
+	}
+
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+svg #head {
+	animation: 3s infinite ease-in-out paused wobble;
+	transform-origin: 51% 65%;
+}
+
+.forward svg #head, 
+.reverse svg #head,
+.left svg #head,
+.right svg #head {
+	animation-play-state: running;
+}
+
+
+
+/* Settings */
+
+.settings {
+	position: absolute;
+	top: calc(100vh - var(--settings-height));
+	width: 100%;
+	min-height: var(--settings-height);
+	background: #333;
+
+	transition: opacity .3s ease-in-out;
+	opacity: 0.3;
+	pointer-events: none;
+}
+body.connected .settings {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+
+
+/* Pills */
+
+.pills {
+	margin-top: -2.4vh;
+	margin-bottom: 0;
+	display: flex;
+}
+.pills button {
+	margin: 0;
+	padding: 1vh 2vh;
+	border-radius: 0;
+	border-left: none;
+	font-size: 2vh;
+	background: #333;
+}
+.pills button:first-of-type {
+	border-left: .3vh solid #888;
+	border-top-left-radius: 1vh;
+	border-bottom-left-radius: 1vh;
+	margin-left: auto;
+}
+.pills button:last-of-type {
+	border-top-right-radius: 1vh;
+	border-bottom-right-radius: 1vh;
+	margin-right: auto;
+}
+
+body.control button#control,
+body.calibrate button#calibrate,
+body.map button#map {
+	background: #888;
+	color: #fff;
+}
+
+
+
+
+
+/* Views */
+
+.views {
+	padding: 6vh 0;
+	min-height: 6vh;
+	display: block;
+}
+.views > div {
+	display: none;
+}
+
+body.control div#controlView,
+body.calibrate div#calibrateView,
+body.map div#mapView {
+	display: block;
+}
+
+
+
+
+
+
+
+/* Controls */
+
+#controls {
+	margin: 2vh 0;
+	display: inline-grid;
+	
+	grid-template-columns: 8vh 8vh 8vh;
+	grid-template-rows: 8vh 8vh 8vh;
+	grid-gap: 0;
+}
+
+#controls #button-forward {
+	grid-column: 2;
+	grid-row: 1;
+}
+#controls #button-left {
+	grid-column: 1;
+	grid-row: 2;
+}
+#controls #button-right {
+	grid-column: 3;
+	grid-row: 2;
+}
+#controls #button-reverse {
+	grid-column: 2;
+	grid-row: 3;
+}
+
+#controls button {
+	padding: 1vh 2vh;
+	font-size: 2vh;
+}
+
+#controls button:active,
+.forward #controls button#button-forward,
+.reverse #controls button#button-reverse,
+.left #controls button#button-left,
+.right #controls button#button-right {
+	background: #888;
+	color: #444;
+}
+
+
+
+
+/* Calibrate */
+
+#calibrateView {
+	padding-top: 2vh;
+}
+#calibrateView div {
+	display: flex;
+	flex-direction: column;
+}
+#calibrateView div > * {
+	margin: 0 auto;
+}
+#calibrateView svg {
+	fill: #fff;
+	width: 20vh;
+	height: 20vh;
+	margin-bottom: 5vh;
+
+	transition: transform 0.3s linear;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	width: 50vw;
+	background: transparent; 
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+  }
+  
+  input[type=range]:focus {
+	outline: none; 
+  }
+  
+  input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	
+	background: #444;
+	border: .3vh solid #888;
+	border-radius: 1vh;
+	height: 6vh;
+	width: 3vh;
+	cursor: pointer;
+
+	margin-top: -3vh; 
+}
+
+  input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: .3vh;
+	cursor: pointer;
+	background: #888;
+	border-radius: .3vh;
+	border: 10px solid #333;
+	box-sizing: content-box;
+  }
+  
+  input[type=range]:focus::-webkit-slider-runnable-track {
+	background: #367ebd;
+  }
+
+
+
+/* Map */
+
+#mapView button {
+	padding: 1vh 2vh;
+	border: 0;
+	font-size: 2vh;
+	color: #ddd;
+}
+#mapView button svg {
+	fill: #ddd;
+	width: 4vh;
+	height: 4vh;
+	vertical-align: top;
+	margin-top: -0.9vh;
+}
+
+#mapView canvas {
+	cursor: crosshair;
+	width: 100vw;
+	height: 49vh;
+  }
+
+
+
