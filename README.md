@@ -1,10 +1,11 @@
 # BluetoothRocks! BB8
-Controlling a Spherio BB-8 with WebBluetooth
+
+Controlling a Sphero BB-8 with WebBluetooth
 
 
 ## What do I need?
 
-- [Spherio BB-8 App-Enabled Droid](https://www.sphero.com/bb-8-app-enabled-droid)
+- [Sphero BB-8 App-Enabled Droid](https://www.sphero.com/bb-8-app-enabled-droid)
 - A browser that support WebBluetooth on your operating system
 
 Try it out at: https://bluetooth.rocks/bb8
